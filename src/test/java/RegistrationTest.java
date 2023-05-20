@@ -3,41 +3,31 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import praktikum.page.*;
-import praktikum.rest.client.UserClient;
+import praktikum.page.AccountPage;
+import praktikum.page.CabinetPage;
+import praktikum.page.MainPage;
+import praktikum.page.RegistrationPage;
 import praktikum.rest.model.User;
 import praktikum.rest.model.UserGenerator;
 
-
+import static driver.WebDriverCreator.createWebDriver;
 import static org.junit.Assert.assertEquals;
-import static praktikum.src.HeaderElements.TOP_CABINET_BUTTON;
-import static praktikum.src.UrlList.CABINET_PAGE_URL;
 import static praktikum.page.RegistrationPage.VALIDATION_ERROR;
+import static praktikum.src.HeaderElements.TOP_CABINET_BUTTON;
 import static praktikum.src.UrlList.ACCOUNT_PAGE_URL;
+import static praktikum.src.UrlList.CABINET_PAGE_URL;
 
 public class RegistrationTest {
-    private UserClient userClient;
+
     private WebDriver driver;
 
     @Before
-    public void setUp(){
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        //Настройка для тестирования на Яндекс.Браузере
-        //System.setProperty("webdriver.chrome.driver", "C:\\webdriver\\yandexdriver.exe");
-        driver = new ChromeDriver(options);
-        userClient = new UserClient();
+    public void setUp() {
+        driver = createWebDriver();
     }
 
     @After
     public void cleanUp(){
-        CurrentPage currentPage = new CurrentPage(driver);
-        String accessToken = currentPage.getAuthToken();
-
-        if(accessToken!=null){userClient.delete(accessToken);}
-
         driver.quit();
     }
 
