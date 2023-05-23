@@ -8,9 +8,9 @@ import static praktikum.src.UrlList.ACCOUNT_PAGE_URL;
 
 public class AccountPage {
 
-    public static final String EMAIL_INPUT = "//label[contains(text(),'Email')]/../input";
-    public static final String PASSWORD_INPUT = "//label[contains(text(),'Пароль')]/../input";
-    public static final String LOGIN_BUTTON = "//button[text()='Войти']";
+    private static final String EMAIL_INPUT = "//label[contains(text(),'Email')]/../input";
+    private static final String PASSWORD_INPUT = "//label[contains(text(),'Пароль')]/../input";
+    private static final String LOGIN_BUTTON = "//button[text()='Войти']";
 
     private final WebDriver driver;
     public AccountPage(WebDriver driver){

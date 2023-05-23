@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import static praktikum.src.UrlList.PASSWORD_RESTORE_PAGE_URL;
 
 public class RestorePage {
-    public static final String RETURN_TO_ACCOUNT_BUTTON = ".//a[contains(@href,'login')]";
+    private static final String RETURN_TO_ACCOUNT_BUTTON = ".//a[contains(@href,'login')]";
     private final WebDriver driver;
     public RestorePage(WebDriver driver){
         this.driver = driver;

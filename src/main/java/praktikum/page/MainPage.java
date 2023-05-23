@@ -13,9 +13,9 @@ import static praktikum.src.UrlList.MAIN_PAGE_URL;
 
 public class MainPage {
     public static final String MIDDLE_CABINET_BUTTON = ".//button[text()='Войти в аккаунт']";
-    public static final String BUN_CONSTRUCTOR_BUTTON = ".//span[text()='Булки']";
-    public static final String SAUCE_CONSTRUCTOR_BUTTON = ".//span[text()='Соусы']";
-    public static final String INGREDIENT_CONSTRUCTOR_BUTTON = ".//div/span[text()='Начинки']";
+    private static final String BUN_CONSTRUCTOR_BUTTON = ".//span[text()='Булки']";
+    private static final String SAUCE_CONSTRUCTOR_BUTTON = ".//span[text()='Соусы']";
+    private static final String INGREDIENT_CONSTRUCTOR_BUTTON = ".//div/span[text()='Начинки']";
     private final WebDriver driver;
     public MainPage(WebDriver driver){
         this.driver = driver;

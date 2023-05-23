@@ -1,18 +1,14 @@
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import praktikum.page.AccountPage;
-import praktikum.page.CabinetPage;
-import praktikum.page.MainPage;
-import praktikum.page.RegistrationPage;
+import praktikum.page.*;
+import praktikum.rest.client.UserClient;
 import praktikum.rest.model.User;
 import praktikum.rest.model.UserGenerator;
 
 import static driver.WebDriverCreator.createWebDriver;
 import static org.junit.Assert.assertEquals;
-import static praktikum.page.RegistrationPage.VALIDATION_ERROR;
 import static praktikum.src.HeaderElements.TOP_CABINET_BUTTON;
 import static praktikum.src.UrlList.ACCOUNT_PAGE_URL;
 import static praktikum.src.UrlList.CABINET_PAGE_URL;
@@ -20,7 +16,7 @@ import static praktikum.src.UrlList.CABINET_PAGE_URL;
 public class RegistrationTest {
 
     private WebDriver driver;
-
+    UserClient userClient = new UserClient();
     @Before
     public void setUp() {
         driver = createWebDriver();
@@ -28,6 +24,11 @@ public class RegistrationTest {
 
     @After
     public void cleanUp(){
+        CurrentPage currentPage = new CurrentPage(driver);
+        String accessToken = currentPage.getAuthToken();
+
+        if(accessToken!=null){userClient.delete(accessToken);}
+
         driver.quit();
     }
 
@@ -73,6 +74,6 @@ public class RegistrationTest {
         registrationPage.fillPassword(user.getPassword());
         registrationPage.confirmRegistration();
 
-        assertEquals("Сообщение об ошибке не вывелось или не совпало", "Некорректный пароль", driver.findElement(By.xpath(VALIDATION_ERROR)).getText());
+        assertEquals("Сообщение об ошибке не вывелось или не совпало", "Некорректный пароль", registrationPage.checkValidationError());
     }
 }

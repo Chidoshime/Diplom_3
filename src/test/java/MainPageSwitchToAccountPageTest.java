@@ -6,17 +6,18 @@ import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import praktikum.page.CurrentPage;
 import praktikum.page.MainPage;
+import praktikum.rest.client.UserClient;
 
 import static driver.WebDriverCreator.createWebDriver;
 import static org.junit.Assert.assertEquals;
-import static praktikum.page.MainPage.MIDDLE_CABINET_BUTTON;
+import static praktikum.page.MainPage.*;
 import static praktikum.src.HeaderElements.TOP_CABINET_BUTTON;
 import static praktikum.src.UrlList.ACCOUNT_PAGE_URL;
 
 @RunWith(Parameterized.class)
 public class MainPageSwitchToAccountPageTest {
+    UserClient userClient = new UserClient();
     private WebDriver driver;
-
     private final String button;
 
     public MainPageSwitchToAccountPageTest(String button){
@@ -50,6 +51,11 @@ public class MainPageSwitchToAccountPageTest {
 
     @After
     public void cleanUp(){
+        CurrentPage currentPage = new CurrentPage(driver);
+        String accessToken = currentPage.getAuthToken();
+
+        if(accessToken!=null){userClient.delete(accessToken);}
+
         driver.quit();
     }
 }

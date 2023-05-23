@@ -3,11 +3,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
+import praktikum.page.CurrentPage;
 import praktikum.page.MainPage;
+import praktikum.rest.client.UserClient;
 
 import static driver.WebDriverCreator.createWebDriver;
 
 public class ConstructorTest  {
+    UserClient userClient = new UserClient();
     private WebDriver driver;
     @Before
     public void setUp() {
@@ -46,6 +49,11 @@ public class ConstructorTest  {
 
     @After
     public void cleanUp(){
+        CurrentPage currentPage = new CurrentPage(driver);
+        String accessToken = currentPage.getAuthToken();
+
+        if(accessToken!=null){userClient.delete(accessToken);}
+
         driver.quit();
     }
 }

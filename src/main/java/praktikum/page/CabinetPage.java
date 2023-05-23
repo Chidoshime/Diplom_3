@@ -8,9 +8,9 @@ import static praktikum.src.HeaderElements.CONSTRUCTOR_BUTTON;
 
 public class CabinetPage {
 
-    public static final String CABINET_NAME_INPUT = ".//input[@name='Name']";
-    public static final String CABINET_EMAIL_INPUT = ".//input[@name='name']";
-    public static final String LOGOUT_BUTTON = ".//button[text()='Выход']";
+    private static final String CABINET_NAME_INPUT = ".//input[@name='Name']";
+    private static final String CABINET_EMAIL_INPUT = ".//input[@name='name']";
+    private static final String LOGOUT_BUTTON = ".//button[text()='Выход']";
     private final WebDriver driver;
     public CabinetPage(WebDriver driver){
         this.driver = driver;

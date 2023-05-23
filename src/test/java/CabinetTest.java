@@ -99,6 +99,11 @@ public class CabinetTest {
     }
     @After
     public void cleanUp(){
+        CurrentPage currentPage = new CurrentPage(driver);
+        String accessToken = currentPage.getAuthToken();
+
+        if(accessToken!=null){userClient.delete(accessToken);}
+
         driver.quit();
     }
 }
